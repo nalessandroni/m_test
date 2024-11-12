@@ -1,13 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mermaid Diagram Viewer</title>
+  
+  <!-- Load Mermaid library from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    // Initialize Mermaid
+    mermaid.initialize({ startOnLoad: true, theme: "default" });
+  </script>
+  
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .mermaid-container {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      padding: 1rem;
+    }
+  </style>
 </head>
 <body>
-    <div id="mermaid-gist">
-        <script src="https://gist.github.com/nalessandroni/9a5b0bdc538330af26e782e8ca523a98.js"></script>
+  <div class="mermaid-container">
+    <div class="mermaid">
+      flowchart TB
+    A1{"START HERE. 
+    Shortlist potential
+journals and 
+choose one"} --> A2["Is the journal 
+Open Access?"]
+    A2 -- no --> E["Does the journal 
+    stipulate an embargo 
+    before you can share 
+    the postprint?"]
+    E -- yes --> E2["Is it compatible with 
+    mandates by relevant 
+    funding agencies?"]
+    E -- no --> E3
+    E2 -- yes --> E3["Consider depositing the pre/postprint 
+    in an open repository
+    such as Spectrum 
+    or PsyArXiv"]
+    E3 --> X{"Very good! Your 
+    pre/postprint will be 
+    openly available 
+    (but the VoR 
+    will not)"}
+    A2 -- yes/IDK --> A3["Is the journal 
+listed in DOAJ?"]
+    A3 -- yes --> B1["Does the journal 
+charge APCs?"]
+    A3 -- no --> V
+    B1 -- yes --> B2["Are APCs fair 
+and transparent?"]
+    B2 -- yes --> C["Are you eligible for 
+a (partial) waiver through 
+CKRN Transformative 
+Agreements?"]
+    B1 -- no --> W{"Great! The VoR
+    of your manuscript 
+    will be openly available"}
+    C -- no --> V
+    C -- yes --> D["Do you have funds to 
+pay any remaining APCs?
+(if applicable)"]
+    E2 -- no --> V{"Consider choosing 
+    a different journal 
+    from your list 
+    and start over"}
+    D -- no --> V
+    D -- yes --> W
+    W -- but also --> E3
+    V -.-> A2
+    style A1 fill:#BBDEFB
+    style X fill:#FFF9C4
+    style W fill:#C8E6C9
+    style V fill:#FFCDD2
     </div>
+  </div>
 </body>
 </html>
